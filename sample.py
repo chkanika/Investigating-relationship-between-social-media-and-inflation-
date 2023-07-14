@@ -73,5 +73,9 @@ class TwitterClient(object):
             return tweets 
         except tweepy.TweepError as e:
             print("Error : " +str(e))
+            
+def main():
+    # creating object of TwitterClient Class 
+    api = TwitterClient()
                 
                 
