@@ -77,5 +77,5 @@ class TwitterClient(object):
 def main():
     # creating object of TwitterClient Class 
     api = TwitterClient()
-                
+    # calling function to get tweets
                 
