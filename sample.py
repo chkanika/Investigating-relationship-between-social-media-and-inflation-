@@ -78,4 +78,4 @@ def main():
     # creating object of TwitterClient Class 
     api = TwitterClient()
     # calling function to get tweets
-                
+    tweets = api.get_tweets(query = 'Trump', count = 200)
