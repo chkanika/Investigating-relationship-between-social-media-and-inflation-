@@ -79,3 +79,5 @@ def main():
     api = TwitterClient()
     # calling function to get tweets
     tweets = api.get_tweets(query = 'Trump', count = 200)
+    # picking positive tweets for tweets 
+    ptweets = [tweet for tweet in tweets if tweet]
