@@ -14,10 +14,10 @@ class TwitterClient(object):
     def __init__(self):
         # class constructor and initalization method 
         # keys and tokens from twitter dev console 
-        consumer_key = '5A07bgc0Dq2wtDMcrhdxsUfZG'
-        consumer_secret = '94ula1KOe0rvjF9wc5bxKWsKsq4xXVqftgtzKNKVTy3aZjZJvq'
-        access_token = '1595252769715195904-PDAw3uQqK7kpeeKangEM10Zxd8E00B'
-        access_token_secret = '1595252769715195904-PDAw3uQqK7kpeeKangEM10Zxd8E00B'
+        consumer_key = 'WQviyox19NRT72uz8sTPC9b0Y'
+        consumer_secret = 'b3n7MsxNVYOgDtjD28K2VaQ5tRFQ50QW41zDeNfPmVSQgaia1B'
+        access_token = '1595252769715195904-TkDDpStrPT7AOmOPKZXVC2vgmClPXw'
+        access_token_secret = 'nKjDgYnemu5NOFsJE73UxaeLqDRNNQICFuHeyL8ORJRMs'
         
         # attempt authentication 
         try:
@@ -57,8 +57,9 @@ class TwitterClient(object):
         tweets = []
         try:
             # call twitter api to fetch tweets 
-            fetched_tweets = self.api.search(q=query, count = count)
+            fetched_tweets = self.api.search_tweets(q=query, count = count)
             # parsing tweets one by one 
+            parsed_tweet = []
             for tweets in fetched_tweets:
                 # empty dictionary to store required params of a tweet 
                 parsed_tweet = {}
@@ -77,9 +78,10 @@ class TwitterClient(object):
              
             # return parsed tweets  
             return tweets 
-        except tweepy.errors as e:
+        except BaseException as e:
             # print error (if any)
             print("Error : " +str(e))
+            
             
 # 
 # ... (The rest of your import and class definitions)
@@ -88,15 +90,15 @@ def main():
     # creating object of TwitterClient Class 
     api = TwitterClient()
     # calling function to get tweets
-    tweets = api.get_tweets(query='lazy', count=10)
+    tweets =api.get_tweets(query='lazy', count=10)
     
     # picking positive tweets from tweets 
-    ptweets = [tweet_item for tweet_item in tweets if tweet_item['sentiment'] == 'Positive']
+    ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'Positive']
     # percentage of positive tweets 
     print("Positive tweets percentage: {} %".format(100*len(ptweets)/len(tweets)))
     
     # picking negative tweets from tweets 
-    ntweets = [tweet_item for tweet_item in tweets if tweet_item['sentiment'] == 'Negative']
+    ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'Negative']
     # percentage of negative tweets 
     print("Negative tweets percentage: {} %".format(100*len(ntweets)/len(tweets)))
     
@@ -105,13 +107,13 @@ def main():
     
     # printing first 10 positive tweets 
     print('\n\nPositive tweets:')
-    for tweet_item in ptweets[:10]:
-        print(tweet_item['text'])
+    for tweet in ptweets[:10]:
+        print(tweet['text'])
         
     # printing first 10 negative tweets 
     print('\n\nNegative tweets: ')
-    for tweet_item in ntweets[:10]:
-        print(tweet_item['text'])
+    for tweet in ntweets[:10]:
+        print(tweet['text'])
         
 if __name__ == "__main__":
     # calling main function 
