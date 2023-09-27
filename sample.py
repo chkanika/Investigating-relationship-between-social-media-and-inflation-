@@ -2,7 +2,7 @@
 # 2. make class 
 # 3. def function for variable 
 # 4. def func to clean tweet 
-# 5. def func to get tweet 
+# 5. def func to get tweet he 
 import re
 import tweepy
 from tweepy import OAuthHandler
